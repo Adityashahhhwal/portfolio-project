@@ -107,10 +107,112 @@ function initNavShadow() {
 	});
 }
 
+/* ── Contact Modal ── */
+
+function openContactModal(e) {
+	if (e) e.preventDefault();
+	const modal = document.getElementById('contact-modal');
+	modal.classList.add('open');
+	document.body.classList.add('modal-open');
+	// Focus the first input after animation
+	setTimeout(() => {
+		const firstInput = modal.querySelector('input');
+		if (firstInput) firstInput.focus();
+	}, 350);
+}
+
+function closeContactModal() {
+	const modal = document.getElementById('contact-modal');
+	modal.classList.remove('open');
+	document.body.classList.remove('modal-open');
+	// Reset form & status when closing
+	const form = document.getElementById('contact-form');
+	const formStatus = document.getElementById('form-status');
+	if (form) form.reset();
+	if (formStatus) {
+		formStatus.className = 'form-status';
+		formStatus.textContent = '';
+	}
+}
+
+/* ── Contact Form Handling ── */
+
+function initContactForm() {
+	const form = document.getElementById('contact-form');
+	if (!form) return;
+	const submitBtn = form.querySelector('.submit-btn');
+	const formStatus = document.getElementById('form-status');
+
+	form.addEventListener('submit', async (e) => {
+		e.preventDefault();
+
+		// Disable submit button and show loading state
+		submitBtn.disabled = true;
+		submitBtn.classList.add('loading');
+
+		// Hide any previous status messages
+		formStatus.className = 'form-status';
+		formStatus.textContent = '';
+
+		try {
+			const formData = new FormData(form);
+			const response = await fetch(form.action, {
+				method: 'POST',
+				body: formData,
+				headers: {
+					'Accept': 'application/json'
+				}
+			});
+
+			if (response.ok) {
+				// Success
+				formStatus.textContent = "Message sent successfully! I'll get back to you soon. 🎉";
+				formStatus.classList.add('success', 'show');
+				form.reset();
+
+				// Auto-close modal after success
+				setTimeout(() => {
+					closeContactModal();
+				}, 2500);
+			} else {
+				// Error from server
+				throw new Error('Server error');
+			}
+		} catch (error) {
+			// Error handling
+			formStatus.textContent = 'Oops! Something went wrong. Please try again or email me directly.';
+			formStatus.classList.add('error', 'show');
+
+			// Auto-hide error message after 5 seconds
+			setTimeout(() => {
+				formStatus.classList.remove('show');
+			}, 5000);
+		} finally {
+			// Re-enable submit button and remove loading state
+			submitBtn.disabled = false;
+			submitBtn.classList.remove('loading');
+		}
+	});
+
+	// Close modal on backdrop click
+	const modal = document.getElementById('contact-modal');
+	modal.addEventListener('click', (e) => {
+		if (e.target === modal) closeContactModal();
+	});
+
+	// Close modal on ESC key
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape' && modal.classList.contains('open')) {
+			closeContactModal();
+		}
+	});
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 	const savedTheme = localStorage.getItem(THEME_KEY);
 	applyTheme(savedTheme === 'dark' ? 'dark' : 'light');
 	initScrollReveal();
 	initStaggerReveal();
 	initNavShadow();
+	initContactForm();
 });
