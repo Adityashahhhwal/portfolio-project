@@ -6,7 +6,7 @@ A personal portfolio website built with **HTML, CSS, and JavaScript**.
 
 Access it on the internet here:
 
-🔗 https://adityashahhhwal.me
+🔗 https://adityashahwal.me
 
 ## Features
 
