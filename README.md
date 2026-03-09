@@ -6,7 +6,7 @@ A personal portfolio website built with **HTML, CSS, and JavaScript**.
 
 Access it on the internet here:
 
-🔗 https://adityashahhhwal.github.io/learning-2025/06-portfolio-project/
+🔗 https://adityashahhhwal.me
 
 ## Features
 
