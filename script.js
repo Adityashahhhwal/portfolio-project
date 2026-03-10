@@ -226,7 +226,7 @@ function initProjectsCarousel() {
 		track.style.transform = `translateX(-${current * 100}%)`;
 		dots.forEach((dot, i) => {
 			dot.classList.toggle('active', i === current);
-			dot.setAttribute('aria-selected', String(i === current));
+			dot.setAttribute('aria-pressed', String(i === current));
 		});
 	}
 
@@ -278,6 +278,8 @@ function initProjectsCarousel() {
 		if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
 		if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
 	});
+
+	goTo(0); // set initial aria-pressed state on dots
 }
 
 document.addEventListener('DOMContentLoaded', () => {
