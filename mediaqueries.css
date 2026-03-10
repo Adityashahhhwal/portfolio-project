@@ -12,7 +12,8 @@
   }
 
   #contact,
-  #projects {
+  #projects,
+  #github-activity {
     height: fit-content;
   }
 
@@ -86,6 +87,16 @@
     margin-top: 1.5rem;
   }
 
+  .github-pins-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .github-repo-name {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
   #profile,
   .section-container {
     display: block;
@@ -146,9 +157,30 @@
   }
 }
 
+/* ── Narrow Tablet / Large Phone ── */
+@media screen and (max-width: 760px) {
+  .github-pin-link--wide .github-repo-card {
+    flex-direction: column;
+  }
+
+  .github-pin-link--wide .github-repo-card > .github-repo-top {
+    min-width: unset;
+  }
+
+  .github-pin-link--wide .github-repo-card > .github-repo-desc,
+  .github-pin-link--wide .github-repo-card > .github-repo-tags {
+    border-left: none;
+    padding-left: 0;
+  }
+}
+
 /* ── Mobile ── */
 @media screen and (max-width: 600px) {
   #contact {
+    height: fit-content;
+  }
+
+  #github-activity {
     height: fit-content;
   }
 
@@ -248,6 +280,22 @@
 
   .carousel-slide .details-container {
     padding: 1.25rem;
+  }
+
+  .github-activity-shell {
+    gap: 1rem;
+  }
+
+  .github-embed-card {
+    padding: 1.25rem;
+  }
+
+  .github-card-header {
+    margin-bottom: 1rem;
+  }
+
+  .github-graph-img {
+    min-height: 160px;
   }
 
   #profile .section__pic-container.profile-visual {

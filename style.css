@@ -113,6 +113,7 @@ body {
 
 html {
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body::before {
@@ -174,10 +175,6 @@ h3,
 .btn {
   font-family: var(--font-heading);
   letter-spacing: -0.025em;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 p {
@@ -619,6 +616,12 @@ section {
   box-shadow: 0 8px 24px var(--surface-shadow-hover);
 }
 
+/* GitHub embed cards are large containers — suppress the generic card hover lift */
+.github-embed-card.details-container:hover {
+  transform: none;
+  box-shadow: 0 2px 8px var(--surface-shadow);
+}
+
 .section-container {
   gap: 4rem;
   height: auto;
@@ -863,6 +866,250 @@ article .icon {
   background: var(--text);
   width: 24px;
   border-radius: 4px;
+}
+
+/* GITHUB ACTIVITY */
+
+#github-activity {
+  position: relative;
+}
+
+.github-activity-shell {
+  display: grid;
+  gap: 1.75rem;
+  margin-top: 2rem;
+}
+
+.github-embed-card {
+  text-align: left;
+  overflow: hidden;
+}
+
+.github-card-header {
+  margin-bottom: 1.5rem;
+}
+
+.github-card-header .experience-sub-title {
+  margin-bottom: 0.4rem;
+}
+
+.github-card-header p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* Contribution graph */
+.github-graph-link {
+  display: block;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 300ms ease;
+}
+
+.github-graph-link:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.13);
+}
+
+.github-graph-img,
+.github-pin-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.github-graph-img {
+  min-height: 210px;
+}
+
+/* Pins grid */
+.github-pins-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+  align-items: stretch;
+}
+
+.github-pin-link {
+  display: flex;
+  height: 100%;
+  border-radius: var(--radius-xl);
+  text-decoration: none;
+  outline-offset: 3px;
+}
+
+/* Repo card */
+.github-repo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 100%;
+  padding: 1.3rem 1.3rem 1.15rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--card);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 300ms ease,
+              border-color 280ms ease;
+}
+
+/* Top accent bar — slides in on hover */
+.github-repo-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #2b6cb0 0%, #7dd3fc 100%);
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+.github-pin-link:hover .github-repo-card {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.10), 0 2px 6px rgba(0, 0, 0, 0.05);
+  border-color: rgba(43, 108, 176, 0.20);
+}
+
+body.dark-mode .github-pin-link:hover .github-repo-card {
+  border-color: rgba(125, 211, 252, 0.22);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28), 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.github-pin-link:hover .github-repo-card::after {
+  opacity: 1;
+}
+
+/* Card header row */
+.github-repo-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.github-repo-name {
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.github-repo-visibility {
+  flex-shrink: 0;
+  padding: 0.15rem 0.48rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Description grows to fill space → pins tags to bottom */
+.github-repo-desc {
+  flex: 1;
+  font-size: 0.845rem;
+  color: var(--text-muted);
+  line-height: 1.58;
+}
+
+/* Tags row with language dot */
+.github-repo-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: auto;
+}
+
+.repo-lang-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--dot, #888);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.08);
+}
+
+.github-repo-tag {
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(43, 108, 176, 0.09);
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+body.dark-mode .github-repo-tag {
+  background: rgba(125, 211, 252, 0.11);
+}
+
+/* Stagger entrance — fires when parent shell is revealed */
+@keyframes repoCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.github-activity-shell.revealed .github-pin-link {
+  animation: repoCardIn 0.48s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.github-activity-shell.revealed .github-pin-link:nth-child(1) { animation-delay: 0.34s; }
+.github-activity-shell.revealed .github-pin-link:nth-child(2) { animation-delay: 0.46s; }
+.github-activity-shell.revealed .github-pin-link:nth-child(3) { animation-delay: 0.58s; }
+.github-activity-shell.revealed .github-pin-link:nth-child(4) { animation-delay: 0.70s; }
+
+.github-pin-link--wide {
+  grid-column: 1 / -1;
+}
+
+.github-pin-link--wide .github-repo-card {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.github-pin-link--wide .github-repo-card > .github-repo-top {
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 16rem;
+}
+
+.github-pin-link--wide .github-repo-card > .github-repo-desc {
+  flex: 1;
+  border-left: 1px solid var(--border);
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.github-pin-link--wide .github-repo-card > .github-repo-tags {
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-self: center;
+  border-left: 1px solid var(--border);
+  padding-left: 1.5rem;
 }
 
 /* CONTACT */
@@ -1159,7 +1406,6 @@ footer p {
   opacity: 0.7;
 }
 
-.details-container,
 .color-container,
 .contact-info-upper-container,
 .project-btn,
