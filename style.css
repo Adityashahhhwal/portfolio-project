@@ -721,7 +721,8 @@ body.dark-mode #profile .profile-portrait {
 article {
   display: flex;
   width: 10rem;
-  justify-content: space-around;
+  justify-content: flex-start;
+  align-items: center;
   gap: 0.5rem;
 }
 
