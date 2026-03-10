@@ -208,6 +208,78 @@ function initContactForm() {
 	});
 }
 
+/* ── Projects Carousel ── */
+function initProjectsCarousel() {
+	const track = document.getElementById('projects-track');
+	if (!track) return;
+
+	const viewport = document.getElementById('projects-viewport');
+	const slides = track.querySelectorAll('.carousel-slide');
+	const dots = document.querySelectorAll('#projects-dots .carousel-dot');
+	const prevBtn = document.getElementById('proj-prev');
+	const nextBtn = document.getElementById('proj-next');
+	const total = slides.length;
+	let current = 0;
+
+	function goTo(index) {
+		current = ((index % total) + total) % total;
+		track.style.transform = `translateX(-${current * 100}%)`;
+		dots.forEach((dot, i) => {
+			dot.classList.toggle('active', i === current);
+			dot.setAttribute('aria-selected', String(i === current));
+		});
+	}
+
+	prevBtn.addEventListener('click', () => goTo(current - 1));
+	nextBtn.addEventListener('click', () => goTo(current + 1));
+	dots.forEach((dot) => {
+		dot.addEventListener('click', () => goTo(Number(dot.dataset.index)));
+	});
+
+	// Touch & mouse-drag swipe
+	let pointerStart = 0;
+	let pointerDelta = 0;
+	let pointerActive = false;
+
+	function onPointerDown(x) {
+		pointerActive = true;
+		pointerStart = x;
+		pointerDelta = 0;
+		viewport.classList.add('is-dragging');
+		track.style.transition = 'none';
+	}
+	function onPointerMove(x) {
+		if (!pointerActive) return;
+		pointerDelta = x - pointerStart;
+	}
+	function onPointerUp() {
+		if (!pointerActive) return;
+		pointerActive = false;
+		viewport.classList.remove('is-dragging');
+		track.style.transition = '';
+		if (Math.abs(pointerDelta) > 50) {
+			goTo(pointerDelta < 0 ? current + 1 : current - 1);
+		} else {
+			goTo(current); // snap back
+		}
+		pointerDelta = 0;
+	}
+
+	viewport.addEventListener('mousedown', (e) => onPointerDown(e.clientX));
+	window.addEventListener('mousemove', (e) => { if (pointerActive) onPointerMove(e.clientX); });
+	window.addEventListener('mouseup', onPointerUp);
+
+	viewport.addEventListener('touchstart', (e) => onPointerDown(e.touches[0].clientX), { passive: true });
+	viewport.addEventListener('touchmove', (e) => { if (pointerActive) onPointerMove(e.touches[0].clientX); }, { passive: true });
+	viewport.addEventListener('touchend', onPointerUp, { passive: true });
+
+	// Keyboard navigation
+	track.closest('.projects-carousel').addEventListener('keydown', (e) => {
+		if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+		if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+	});
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 	const savedTheme = localStorage.getItem(THEME_KEY);
 	applyTheme(savedTheme === 'dark' ? 'dark' : 'light');
@@ -215,4 +287,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	initStaggerReveal();
 	initNavShadow();
 	initContactForm();
+	initProjectsCarousel();
 });

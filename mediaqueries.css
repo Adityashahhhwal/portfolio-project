@@ -1,22 +1,28 @@
 /* ── Tablet & Small Laptop ── */
-@media screen and (max-width: 1400px) {
+@media screen and (min-width: 1000px) and (max-width: 2000px) {
   #profile {
     height: auto;
     margin-bottom: 4rem;
   }
 
   .about-containers {
-    flex-wrap: wrap;
+    flex-wrap: wrap; 
+    gap: 2rem;
+
   }
 
   #contact,
   #projects {
     height: fit-content;
   }
+
+  .projects-carousel {
+    max-width: 520px;
+  }
 }
 
 /* ── Landscape Tablet ── */
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
   #desktop-nav {
     display: flex;
     position: sticky;
@@ -205,9 +211,30 @@
   }
 
   .section__pic-container {
-    width: auto;
-    height: 46vw;
+    width: min(250px, 60vw);
+    height: min(250px, 60vw);
+    margin: 0 auto 1.5rem;
     justify-content: center;
+  }
+
+  .projects-carousel {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .carousel-btn {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.4rem;
+  }
+
+  .carousel-slide .details-container {
+    padding: 1.25rem;
+  }
+
+  #profile .section__pic-container.profile-visual {
+    width: min(280px, 72vw);
+    height: min(280px, 72vw);
   }
 
   .section__text__p2 {

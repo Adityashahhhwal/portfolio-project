@@ -20,7 +20,6 @@
         <li><a href="#experience">Experience</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li></li>
       </ul>
     </div>
     <button class="theme-toggle desktop-theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode"
@@ -191,56 +190,77 @@
   <section id="projects">
     <p class="section__text__p1">Browse My Recent</p>
     <h1 class="title">Projects</h1>
-    <div class="experience-details-container">
-      <div class="about-containers">
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img src="./assets/project-3.png" alt="Amazon Project preview" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">Amazon Project</h2>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn"
-              onclick="window.open('https://github.com/Adityashahhhwal/learning-2025/tree/main/05-amazon-project', '_blank')">
-              Github
-            </button>
-            <button class="btn btn-color-2 project-btn"
-              onclick="window.open('https://adityashahhhwal.github.io/learning-2025/05-amazon-project/javascript-amazon-project/amazon.html', '_blank')">
-              Live Demo
-            </button>
+    <div class="projects-carousel reveal">
+      <div class="carousel-wrapper">
+        <button class="carousel-btn carousel-prev" id="proj-prev" aria-label="Previous project">&#8249;</button>
+        <div class="carousel-viewport" id="projects-viewport">
+          <div class="carousel-track" id="projects-track">
+
+            <div class="carousel-slide">
+              <div class="details-container color-container">
+                <div class="article-container">
+                  <img src="./assets/project-3.png" alt="Amazon Project preview" class="project-img" />
+                </div>
+                <h2 class="experience-sub-title project-title">Amazon Project</h2>
+                <div class="btn-container">
+                  <button class="btn btn-color-2 project-btn"
+                    onclick="window.open('https://github.com/Adityashahhhwal/learning-2025/tree/main/05-amazon-project', '_blank')">
+                    Github
+                  </button>
+                  <button class="btn btn-color-2 project-btn"
+                    onclick="window.open('https://adityashahhhwal.github.io/learning-2025/05-amazon-project/javascript-amazon-project/amazon.html', '_blank')">
+                    Live Demo
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-slide">
+              <div class="details-container color-container">
+                <div class="article-container">
+                  <img src="./assets/project-1.png" alt="To-Do List App preview" class="project-img" />
+                </div>
+                <h2 class="experience-sub-title project-title">To-Do List App</h2>
+                <div class="btn-container">
+                  <button class="btn btn-color-2 project-btn"
+                    onclick="window.open('https://github.com/Adityashahhhwal/learning-2025/tree/main/04-todo-list', '_blank')">
+                    Github
+                  </button>
+                  <button class="btn btn-color-2 project-btn"
+                    onclick="window.open('https://adityashahhhwal.github.io/learning-2025/04-todo-list/', '_blank')">
+                    Live Demo
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-slide">
+              <div class="details-container color-container">
+                <div class="article-container">
+                  <img src="./assets/project-2.png" alt="Rock Paper Scissors preview" class="project-img" />
+                </div>
+                <h2 class="experience-sub-title project-title">Rock Paper Scissors</h2>
+                <div class="btn-container">
+                  <button class="btn btn-color-2 project-btn"
+                    onclick="window.open('https://github.com/Adityashahhhwal/learning-2025/tree/main/03-rock-paper-scissors', '_blank')">
+                    Github
+                  </button>
+                  <button class="btn btn-color-2 project-btn"
+                    onclick="window.open('https://adityashahhhwal.github.io/learning-2025/03-rock-paper-scissors/', '_blank')">
+                    Live Demo
+                  </button>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img src="./assets/project-1.png" alt="To-Do List App preview" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">To-Do List App</h2>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn"
-              onclick="window.open('https://github.com/Adityashahhhwal/learning-2025/tree/main/04-todo-list', '_blank')">
-              Github
-            </button>
-            <button class="btn btn-color-2 project-btn"
-              onclick="window.open('https://adityashahhhwal.github.io/learning-2025/04-todo-list/', '_blank')">
-              Live Demo
-            </button>
-          </div>
-        </div>
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img src="./assets/project-2.png" alt="Rock Paper Scissors preview" class="project-img" />
-          </div>
-          <h2 class="experience-sub-title project-title">Rock Paper Scissors</h2>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn"
-              onclick="window.open('https://github.com/Adityashahhhwal/learning-2025/tree/main/03-rock-paper-scissors', '_blank')">
-              Github
-            </button>
-            <button class="btn btn-color-2 project-btn"
-              onclick="window.open('https://adityashahhhwal.github.io/learning-2025/03-rock-paper-scissors/', '_blank')">
-              Live Demo
-            </button>
-          </div>
-        </div>
+        <button class="carousel-btn carousel-next" id="proj-next" aria-label="Next project">&#8250;</button>
+      </div>
+      <div class="carousel-dots" id="projects-dots">
+        <button class="carousel-dot active" data-index="0" aria-label="Go to project 1"></button>
+        <button class="carousel-dot" data-index="1" aria-label="Go to project 2"></button>
+        <button class="carousel-dot" data-index="2" aria-label="Go to project 3"></button>
       </div>
     </div>
     <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#contact'" />
@@ -315,7 +335,7 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
 </body>
 
 </html>
